@@ -4,9 +4,9 @@ import HomeView from '@/views/HomeView.vue'
 import ExploreView from '@/views/ExploreView.vue'
 import PlaceDetailView from '@/views/PlaceDetailView.vue'
 import MapView from '@/views/MapView.vue'
-import CoursesView from '@/views/CoursesView.vue'
-import CourseDetailView from '@/views/CourseDetailView.vue'
-import EventsView from '@/views/EventsView.vue'
+import CommunityView from '@/views/CommunityView.vue'
+import CommunityWriteView from '@/views/CommunityWriteView.vue'
+import CommunityPostView from '@/views/CommunityPostView.vue'
 import ChatbotView from '@/views/ChatbotView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
@@ -37,28 +37,28 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '지도' }
   },
   {
-    path: '/courses',
-    name: 'courses',
-    component: CoursesView,
-    meta: { title: '여행코스' }
+    path: '/community',
+    name: 'community',
+    component: CommunityView,
+    meta: { title: '커뮤니티' }
   },
   {
-    path: '/courses/:id',
-    name: 'course-detail',
-    component: CourseDetailView,
-    meta: { title: '코스 상세' }
+    path: '/community/write',
+    name: 'community-write',
+    component: CommunityWriteView,
+    meta: { title: '게시글 작성' }
   },
   {
-    path: '/events',
-    name: 'events',
-    component: EventsView,
-    meta: { title: '축제/행사' }
+    path: '/community/:id',
+    name: 'community-post',
+    component: CommunityPostView,
+    meta: { title: '게시글 상세' }
   },
   {
     path: '/chatbot',
     name: 'chatbot',
     component: ChatbotView,
-    meta: { title: 'AI 챗봇' }
+    meta: { title: '챗봇' }
   },
   {
     path: '/about',
@@ -70,7 +70,7 @@ const routes: RouteRecordRaw[] = [
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView,
-    meta: { title: '페이지를 찾을 수 없음' }
+    meta: { title: '페이지 없음' }
   }
 ]
 
