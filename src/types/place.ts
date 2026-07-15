@@ -3,7 +3,7 @@ export type PlaceType = 'tour' | 'leisure' | 'culture' | 'shopping' | 'lodging' 
 export interface PlaceRecord {
   id: string
   sourceFile: string
-  type: PlaceType
+  type: string
   typeLabel: string
   title: string
   address: string
@@ -11,6 +11,8 @@ export interface PlaceRecord {
   lat: number | null
   lng: number | null
   imageUrl: string | null
+  firstimage?: string | null
+  firstimage2?: string | null
   tel: string | null
   description: string
   contentTypeId: number | null

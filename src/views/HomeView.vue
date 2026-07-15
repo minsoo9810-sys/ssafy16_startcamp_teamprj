@@ -52,4 +52,84 @@
       <p>관광지 추천과 지역 정보를 자연어로 확인합니다.</p>
     </router-link>
   </section>
+
+  <section class="region-preview-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">권역 소개</p>
+        <h2>실제 서울 장소 만나기</h2>
+        <p class="page-subtitle">
+          실제 JSON 데이터에서 랜덤으로 뽑은 장소의 사진과 정보를 보여줍니다.
+        </p>
+      </div>
+
+      <router-link class="btn btn-secondary" to="/regions">전체 보기</router-link>
+    </div>
+
+    <div v-if="loadingPlaces" class="loading-shell">
+      <div class="spinner"></div>
+      <p>대표 사진을 불러오는 중입니다...</p>
+    </div>
+
+    <div v-else class="region-preview-grid">
+      <router-link
+        v-for="place in featuredPlaces"
+        :key="place.id || place.title"
+        class="region-preview-card"
+        to="/regions"
+      >
+        <img :src="getPlaceImage(place)" :alt="place.title" />
+        <div class="region-preview-body">
+          <h3>{{ place.title }}</h3>
+          <p>{{ place.address || '주소 정보 없음' }}</p>
+        </div>
+      </router-link>
+    </div>
+  </section>
 </template>
+
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { loadPlaces } from '@/api/place'
+import type { PlaceRecord } from '@/types/place'
+
+const featuredPlaces = ref<PlaceRecord[]>([])
+const loadingPlaces = ref(true)
+
+onMounted(async () => {
+  try {
+    const result = await loadPlaces()
+    const items = (result.items || []).filter((place) => Boolean(place.title))
+
+    const shuffled = [...items].sort(() => Math.random() - 0.5)
+    featuredPlaces.value = shuffled.slice(0, 3)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loadingPlaces.value = false
+  }
+})
+
+function getPlaceImage(place: PlaceRecord): string {
+  const firstimage = (place as PlaceRecord & {
+    firstimage?: string | null
+    firstimage2?: string | null
+    imageUrl?: string | null
+  }).firstimage
+
+  const firstimage2 = (place as PlaceRecord & {
+    firstimage2?: string | null
+  }).firstimage2
+
+  const imageUrl = (place as PlaceRecord & {
+    imageUrl?: string | null
+  }).imageUrl
+
+  return (
+    firstimage ||
+    firstimage2 ||
+    imageUrl ||
+    'https://images.unsplash.com/photo-1527153818091-1a9638521e2a?auto=format&fit=crop&w=900&q=80'
+  )
+}
+</script>

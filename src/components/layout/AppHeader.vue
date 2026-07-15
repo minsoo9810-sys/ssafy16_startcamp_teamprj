@@ -10,6 +10,7 @@
       <router-link class="nav-link" to="/explore">탐색</router-link>
       <router-link class="nav-link" to="/map">지도</router-link>
       <router-link class="nav-link" to="/community">커뮤니티</router-link>
+      <router-link class="nav-link" to="/regions">권역 소개</router-link>
       <router-link class="nav-link" to="/chatbot">챗봇</router-link>
       <router-link class="nav-link" to="/about">정보</router-link>
     </nav>

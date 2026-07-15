@@ -10,6 +10,8 @@ import CommunityPostView from '@/views/CommunityPostView.vue'
 import ChatbotView from '@/views/ChatbotView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
+import RegionIntroView from '@/views/RegionIntroView.vue'
+
 
 const routes: RouteRecordRaw[] = [
   {
@@ -71,7 +73,13 @@ const routes: RouteRecordRaw[] = [
     name: 'not-found',
     component: NotFoundView,
     meta: { title: '페이지 없음' }
-  }
+  },
+  {
+  path: '/regions',
+  name: 'regions',
+  component: RegionIntroView,
+  meta: { title: '권역 소개' }
+}
 ]
 
 const router = createRouter({
