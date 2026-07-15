@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "files": [
+    { "name": "서울_관광지.json", "type": "tour", "typeLabel": "관광지" },
+    { "name": "서울_레포츠.json", "type": "leisure", "typeLabel": "레포츠" },
+    { "name": "서울_문화시설.json", "type": "culture", "typeLabel": "문화시설" },
+    { "name": "서울_쇼핑.json", "type": "shopping", "typeLabel": "쇼핑" },
+    { "name": "서울_숙박.json", "type": "lodging", "typeLabel": "숙박" },
+    { "name": "서울_여행코스.json", "type": "course", "typeLabel": "여행코스" },
+    { "name": "서울_축제공연행사.json", "type": "festival", "typeLabel": "축제공연행사" }
+  ]
+}
