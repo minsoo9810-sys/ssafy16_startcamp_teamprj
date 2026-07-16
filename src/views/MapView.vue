@@ -87,7 +87,7 @@ const places = ref<PlaceRecord[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-const selectedType = ref<'all' | PlaceType>('all')
+const selectedType = ref<'all' | PlaceType>('course')
 const selectedDistrict = ref<string>('all')
 const selectedPlace = ref<PlaceRecord | null>(null)
 
@@ -95,6 +95,16 @@ const mapContainer = ref<HTMLElement | null>(null)
 
 let map: L.Map | null = null
 let markerLayer: L.LayerGroup | null = null
+
+const defaultMarkerIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+})
 
 const districtOptions = computed(() => {
   const districts = new Set<string>()
@@ -166,7 +176,8 @@ function renderMarkers() {
     if (!place.lat || !place.lng) return
 
     const marker = L.marker([place.lat, place.lng], {
-      title: place.title
+      title: place.title,
+      icon: defaultMarkerIcon
     })
 
     marker.on('click', () => {
