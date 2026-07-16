@@ -184,11 +184,12 @@ function renderMarkers() {
       }).setContent(getPopupHtml(place))
     )
 
-    marker.addTo(markerLayer)
+    marker.addTo(markerLayer!)
   })
 
-  if (filteredPlaces.value.length > 0 && filteredPlaces.value[0].lat && filteredPlaces.value[0].lng) {
-    map.setView([filteredPlaces.value[0].lat, filteredPlaces.value[0].lng], 12)
+  // ⭐ [수정] map이 확실히 null이 아닐 때만 setView가 작동하도록 조건 추가
+  if (map && filteredPlaces.value.length > 0 && filteredPlaces.value[0].lat && filteredPlaces.value[0].lng) {
+    map.setView([filteredPlaces.value[0].lat!, filteredPlaces.value[0].lng!], 12)
   }
 }
 

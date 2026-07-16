@@ -156,14 +156,29 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { loadPlaces } from '@/api/place'
-import type { PlaceRecord } from '@/types/place'
+
+// 1. PlaceRecord에 addr1과 zipcode가 없을 때 터지는 에러를 방지하기 위해 임시로 타입을 확장합니다.
+interface ExtendedPlaceRecord {
+  id?: string;
+  title?: string;
+  address?: string;
+  addr1?: string;    // 에러 방지용 추가
+  zipcode?: string;  // 에러 방지용 추가
+  tel?: string;
+  type?: string;
+  typeLabel?: string;
+  district?: string;
+  imageUrl?: string;
+  firstimage?: string;
+  firstimage2?: string;
+  description?: string;
+}
 
 // ==========================================
 // 1. 상태(State) 정의
 // ==========================================
-const places = ref<PlaceRecord[]>([])
-const address = (place as any).addr1;
-const zip = (place as any).zipcode;
+// 타입을 PlaceRecord 대신 우리가 위에서 만든 ExtendedPlaceRecord[] 로 지정하여 타입 에러를 원천 차단합니다!
+const places = ref<ExtendedPlaceRecord[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
@@ -171,7 +186,7 @@ const currentPage = ref<number>(1) // 현재 활성화된 페이지 번호
 const itemsPerPage = 12             // 한 페이지당 보여줄 장소 개수
 
 const isModalOpen = ref<boolean>(false)
-const selectedPlace = ref<PlaceRecord | null>(null)
+const selectedPlace = ref<ExtendedPlaceRecord | null>(null)
 
 const selectedCategory = ref<string>('')
 const selectedDistrict = ref<string>('')
@@ -196,7 +211,7 @@ const districts = computed<string[]>(() => {
 })
 
 // 카테고리와 지역 필터가 적용된 최종 데이터 필터링 계산식
-const filteredPlaces = computed<PlaceRecord[]>(() => {
+const filteredPlaces = computed<ExtendedPlaceRecord[]>(() => {
   return places.value.filter(place => {
     // 카테고리 조건 비교
     const matchCategory = !selectedCategory.value || place.typeLabel === selectedCategory.value
@@ -209,7 +224,7 @@ const filteredPlaces = computed<PlaceRecord[]>(() => {
 })
 
 // 필터링된 데이터(filteredPlaces)를 기준으로 12개 자르기
-const paginatedPlaces = computed<PlaceRecord[]>(() => {
+const paginatedPlaces = computed<ExtendedPlaceRecord[]>(() => {
   const start = (currentPage.value - 1) * itemsPerPage
   const end = start + itemsPerPage
   return (filteredPlaces.value || []).slice(start, end)
@@ -235,7 +250,7 @@ const resetPage = () => {
   currentPage.value = 1
 }
 
-const openDetailModal = (place: PlaceRecord) => {
+const openDetailModal = (place: ExtendedPlaceRecord) => {
   selectedPlace.value = place
   isModalOpen.value = true
 }
@@ -266,7 +281,7 @@ watch([selectedCategory, selectedDistrict], () => {
 onMounted(async () => {
   try {
     const result = await loadPlaces()
-    places.value = result.items
+    places.value = result.items as ExtendedPlaceRecord[]
   } catch (err) {
     error.value = err instanceof Error ? err.message : '데이터를 불러오지 못했습니다.'
   } finally {
