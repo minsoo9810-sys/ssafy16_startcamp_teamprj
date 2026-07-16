@@ -162,6 +162,8 @@ import type { PlaceRecord } from '@/types/place'
 // 1. 상태(State) 정의
 // ==========================================
 const places = ref<PlaceRecord[]>([])
+const address = (place as any).addr1;
+const zip = (place as any).zipcode;
 const loading = ref(true)
 const error = ref<string | null>(null)
 

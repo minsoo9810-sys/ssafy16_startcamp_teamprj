@@ -218,10 +218,13 @@ watch(filteredPlaces, () => {
 })
 
 onBeforeUnmount(() => {
+  if (map && markerLayer) {
+    map.removeLayer(markerLayer)
+  }
   if (map) {
     map.remove()
     map = null
-    markerLayer = null
   }
+  markerLayer = null
 })
 </script>
