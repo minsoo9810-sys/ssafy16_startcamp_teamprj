@@ -30,7 +30,7 @@
         <input
           v-model="input"
           type="text"
-          placeholder="예: 강동구 관광코스 추천해줘, 성북구 맛집 추천해줘"
+          placeholder="예: 강동구 관광코스 추천해줘, 강남구 맛집 추천해줘"
           :disabled="loading"
         />
         <button type="submit" :disabled="loading">
