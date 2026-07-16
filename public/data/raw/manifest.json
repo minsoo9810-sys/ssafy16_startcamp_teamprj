@@ -7,6 +7,7 @@
     { "name": "서울_쇼핑.json", "type": "shopping", "typeLabel": "쇼핑" },
     { "name": "서울_숙박.json", "type": "lodging", "typeLabel": "숙박" },
     { "name": "서울_여행코스.json", "type": "course", "typeLabel": "여행코스" },
-    { "name": "서울_축제공연행사.json", "type": "festival", "typeLabel": "축제공연행사" }
+    { "name": "서울_축제공연행사.json", "type": "festival", "typeLabel": "축제공연행사" },
+    { "name": "서울_맛집.json", "type": "food", "typeLabel": "음식" }
   ]
 }

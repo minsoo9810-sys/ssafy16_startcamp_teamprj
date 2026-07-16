@@ -1,4 +1,4 @@
-export type PlaceType = 'tour' | 'leisure' | 'culture' | 'shopping' | 'lodging' | 'course' | 'festival'
+export type PlaceType = 'tour' | 'leisure' | 'culture' | 'shopping' | 'lodging' | 'course' | 'festival' | 'food'
 
 export interface PlaceRecord {
   id: string

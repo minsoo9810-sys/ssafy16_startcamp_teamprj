@@ -31,6 +31,7 @@
             <option value="lodging">숙박</option>
             <option value="festival">축제공연행사</option>
             <option value="course">여행코스</option>
+            <option value="food">맛집</option>
           </select>
         </div>
 
